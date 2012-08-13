@@ -1,0 +1,92 @@
+﻿<header>
+    <div class="content-wrapper">
+        <div class="float-left">
+            <p class="site-title">
+                <a href="~/">ASP.NET Web API</a></p>
+        </div>
+    </div>
+</header>
+<div id="body">
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>
+                    Welcome to ASP.NET Web API!</h1>
+                <h2>
+                    Modify the code in this template to jump-start your ASP.NET Web API development.</h2>
+            </hgroup>
+            <p>
+                ASP.NET Web API allows you to expose your applications, data and services to the
+                web directly over HTTP.
+            </p>
+            <p>
+                To learn more about ASP.NET Web API visit <a href="http://go.microsoft.com/fwlink/?LinkID=238195"
+                    title="ASP.NET Web API Website">http://asp.net/web-api</a>. The page features
+                <mark>videos, tutorials, and samples</mark> to help you get the
+                most from ASP.NET Web API. If you have any questions about ASP.NET Web API, visit
+                <a href="http://go.microsoft.com/fwlink/?LinkID=238196" title="ASP.NET Web API Forum">
+                    our forums</a>.
+            </p>
+        </div>
+    </section>
+    <section class="content-wrapper main-content clear-fix">
+        <h3>
+            We suggest the following steps:</h3>
+        <ol class="round">
+            <li class="one">
+                <input type="button" value="PUT" id="put-button"/>
+            </li>
+            <li class="two">
+                <input type="button" value="GET" id="get-button"/>
+            </li>
+            <li class="three">
+                <input type="button" value="POST" id="post-button"/>
+            </li>
+        </ol>
+    </section>
+</div>
+
+
+<script type="text/javascript">
+    $(function() {
+        $("#get-button").click(function() {
+            api('GET');
+        });
+        $("#post-button").click(function () {
+            var data = ko.toJSON({
+                value: "hello post!"
+            });
+
+            api('POST', data);
+        });
+        $("#put-button").click(function () {
+            var data = ko.toJSON({
+                id: 1,
+                value: "hello put   !"
+            });
+
+            api('PUT', data);
+        });
+    });
+    
+    function api(verb, data) {
+        $.ajax({
+            url: "/api/values",
+            data: data,
+            type: verb,
+            contentType: 'application/json',
+            statusCode: {
+                200: function () {
+                    alert('OK!');
+                },
+                400: function () {
+                    alert('bad request');
+                },
+                401: function () {
+                    alert('unauthorized');
+                },
+
+            }
+        });
+    }
+</script>
